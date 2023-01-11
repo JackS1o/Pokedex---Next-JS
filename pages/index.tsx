@@ -1,9 +1,12 @@
-import Login from './login'
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./homePage";
+import Login from "./login";
 
 export default function Home() {
   return (
-    <>
-      <Login />
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<HomePage />} />
+    </Routes>
+  );
 }

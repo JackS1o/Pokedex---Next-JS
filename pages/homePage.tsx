@@ -5,14 +5,10 @@ export default function HomePage() {
   const [data, setData] = useState("");
 
   useEffect(() => {
-    requestToApi().then((res) => (setData(res)));
-  }, [])
+    requestToApi().then((res) => setData(res));
+  }, []);
 
   console.log(data);
 
-  return (
-    <div>
-      olá
-    </div>
-  )
+  return <div>olá</div>;
 }
