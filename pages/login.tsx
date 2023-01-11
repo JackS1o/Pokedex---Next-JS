@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import styled from "styled-components";
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -61,7 +61,7 @@ export default function Login() {
       alert("Digite um e-mail válido!");
     }
   }
-
+  
   return (
     <>
       <Header />
