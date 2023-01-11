@@ -60,6 +60,7 @@ export default function Login() {
     if (!result || email === "" || email.length < 5) {
       alert("Digite um e-mail válido!");
     }
+    window.location.href = "/homePage";
   }
   
   return (

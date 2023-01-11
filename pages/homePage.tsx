@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import requestToApi from "./api/pokeApi";
 
-export default function Home() {
+export default function HomePage() {
   const [data, setData] = useState("");
 
   useEffect(() => {
