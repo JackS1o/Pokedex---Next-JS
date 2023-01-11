@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import styled from "styled-components";
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -48,20 +49,22 @@ const Button = styled.button`
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setEmail(value);
   };
-  
+
   const login = () => {
     const verifyEmail = /\S+@\S+\.\S+/;
     const result = verifyEmail.test(email);
     if (!result || email === "" || email.length < 5) {
-      alert("Digite um e-mail válido!");
+      return alert("Digite um e-mail válido!");
     }
-  }
-  
+    navigate("/home");
+  };
+
   return (
     <>
       <Header />
@@ -72,14 +75,13 @@ export default function Login() {
             type="email"
             value={email}
             placeholder="Seu melhor e-mail"
-            onChange={(
-              e: React.ChangeEvent<HTMLInputElement>,
-          ): void => handleChange(e)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              handleChange(e)
+            }
           />
-          <Button
-            type="button"
-            onClick={login}
-            >Acessar</Button>
+          <Button type="button" onClick={login}>
+            Acessar
+          </Button>
         </Div>
       </Container>
     </>
