@@ -7,9 +7,17 @@ export interface PokeInterface {
   sprites: {
     front_default: string;
   };
+  height: number;
+  weight: number;
+  stats: [];
 }
 
 export interface PokeDetailInterface {
-  types: [{ type: { name: string }}];
-  name: string;
+  type: {
+    name: string;
+  };
+  base_stat: number;
+  stat: {
+    name: string;
+  }
 }

@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { requestToApi, requestToApiWithParams } from "./api/pokeApi";
-import { PokeInterface, PokeDetailInterface } from "../interfaces/pokeInterface";
+import {
+  PokeInterface,
+  PokeDetailInterface,
+} from "../interfaces/pokeInterface";
 
 export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
   const [selectedPokemon, setSelectedPokemon] = useState("");
-  const [selectedPokemonData, setSelectedPokemonData] = useState({} as PokeInterface);
+  const [selectedPokemonData, setSelectedPokemonData] = useState(
+    {} as PokeInterface
+  );
 
   useEffect(() => {
     requestToApi().then((res) => setData(res));
@@ -20,7 +25,7 @@ export default function HomePage() {
   }, [selectedPokemon]);
 
   const { results } = data;
-  console.log(results);
+  console.log(selectedPokemonData);
 
   return (
     <div>
@@ -57,10 +62,30 @@ export default function HomePage() {
         <img src={selectedPokemonData.sprites?.front_default} alt="pokemon" />
         <div>
           <p>Type</p>
-          {selectedPokemonData.types?.map((type: PokeDetailInterface, index: number) => (
-            <p key={index}>{type.name}</p>
-          ))}
+          {selectedPokemonData.types?.map(
+            (pokeType: PokeDetailInterface, index: number) => (
+              <p key={index}>{pokeType.type.name}</p>
+            )
+          )}
         </div>
+        <div>
+          <p>Height: {selectedPokemonData.height}</p>
+          <p>Weight: {selectedPokemonData.weight}</p>
+        </div>
+        <div>
+          <p>Attributes</p>
+          {selectedPokemonData.stats?.map(
+            (pokeStat: PokeDetailInterface, index: number) => (
+              <div key={index}>
+                <p>{pokeStat.base_stat}</p>
+                <p>{pokeStat.stat.name}</p>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+      <div>
+        <p>Evolution</p>
       </div>
     </div>
   );
