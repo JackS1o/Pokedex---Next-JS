@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { requestToApi, requestToApiWithParams } from "./api/pokeApi";
+import { requestToApi, requestToApiWithParams, requestPokemonEvolution } from "./api/pokeApi";
 import {
   PokeInterface,
   PokeDetailInterface,
@@ -9,6 +9,9 @@ export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
   const [selectedPokemon, setSelectedPokemon] = useState("");
   const [selectedPokemonData, setSelectedPokemonData] = useState(
+    {} as PokeInterface
+  );
+  const [selectedPokemonEvolution, setSelectedPokemonEvolution] = useState(
     {} as PokeInterface
   );
 
@@ -22,10 +25,13 @@ export default function HomePage() {
         setSelectedPokemonData(res)
       );
     }
-  }, [selectedPokemon]);
+    requestPokemonEvolution(selectedPokemonData.id).then((res) =>
+      setSelectedPokemonEvolution(res)
+    );
+  }, [selectedPokemon, selectedPokemonData.id]);
 
   const { results } = data;
-  console.log(selectedPokemonData);
+  console.log(selectedPokemonEvolution);
 
   return (
     <div>
@@ -86,6 +92,14 @@ export default function HomePage() {
       </div>
       <div>
         <p>Evolution</p>
+        <div>
+          {selectedPokemonEvolution?.chain?.evolves_to?.map((evolution) => (
+            <div>
+              <p>{evolution.species.name}</p>
+              <p>{evolution.evolves_to[0].species.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
