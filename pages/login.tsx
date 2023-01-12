@@ -1,7 +1,6 @@
 import Header from "../components/header";
 import styled from "styled-components";
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -49,7 +48,6 @@ const Button = styled.button`
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
