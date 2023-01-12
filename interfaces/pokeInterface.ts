@@ -10,6 +10,16 @@ export interface PokeInterface {
   height: number;
   weight: number;
   stats: [];
+  chain: {};
+  evolves_to: [{
+    species: {
+      name: string;
+    },
+    evolves_to: []
+  }];
+  species: {
+    name: string;
+  };
 }
 
 export interface PokeDetailInterface {
@@ -19,5 +29,5 @@ export interface PokeDetailInterface {
   base_stat: number;
   stat: {
     name: string;
-  }
+  };
 }
