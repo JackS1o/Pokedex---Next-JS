@@ -1,4 +1,4 @@
-## Minha primeira aplicação Next.js, React, TypeScript e Styled Components
+## Minha primeira aplicação com Next.js, React, TypeScript e Styled Components
 
 Para rodar a aplicação localmente, basta executar os comandos:
 
