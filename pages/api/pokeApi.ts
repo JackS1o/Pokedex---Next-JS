@@ -15,11 +15,3 @@ export async function requestToApiWithParams(params: string) {
     .catch((err) => err);
   return data;
 }
-
-export async function requestPokemonEvolution(id: number) {
-  const data = await axios
-    .get(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
-    .then((res) => res.data)
-    .catch((err) => err);
-  return data;
-}

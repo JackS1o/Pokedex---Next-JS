@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   requestToApi,
   requestToApiWithParams,
-  requestPokemonEvolution,
 } from "./api/pokeApi";
 import {
   PokeInterface,
@@ -51,9 +50,6 @@ export default function HomePage() {
   const [selectedPokemonData, setSelectedPokemonData] = useState(
     {} as PokeInterface
   );
-  const [selectedPokemonEvolution, setSelectedPokemonEvolution] = useState(
-    {} as PokeInterface
-  );
   const [pokeName, setPokeName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -63,36 +59,34 @@ export default function HomePage() {
       setSelectedPokemonData(res)
     );
     if (!selectedPokemon) {
-      requestToApiWithParams("bulbasaur").then((res) =>
+      requestToApiWithParams(selectedPokemon).then((res) =>
         setSelectedPokemonData(res)
       );
     }
-    requestPokemonEvolution(selectedPokemonData?.id).then((res) =>
-      setSelectedPokemonEvolution(res)
-    );
-  }, [selectedPokemon, selectedPokemonData?.id]);
+  }, [selectedPokemon, setSelectedPokemonData]);
 
   const handleSearch = async () => {
     setLoading(true);
     await requestToApiWithParams(pokeName).then((res) => {
-      setSelectedPokemon(res);
+      setSelectedPokemonData(res);
       setLoading(false);
     });
   };
 
-  const pokeEvolution = pokeMock
-    .filter((poke) => {
-      const { id } = poke;
-      const evolutions = id.find((pokeId) => pokeId === selectedPokemonData.id);
-      return evolutions;
-    });
+  const pokeEvolution = pokeMock.filter((poke) => {
+    const { id } = poke;
+    const evolutions = id.find((pokeId) => pokeId === selectedPokemonData.id);
+    return evolutions;
+  });
 
-  const pokeEvolutionName = pokeEvolution.filter((poke) => poke.name !== selectedPokemonData.name);
-  
+  const pokeEvolutionName = pokeEvolution.filter(
+    (poke) => poke.name !== selectedPokemonData.name
+  );
+
   const pokeDescription = pokeMock.filter(
     (poke) => poke.name === selectedPokemonData.name
   );
-
+  
   return (
     <MainContainer>
       <LeftContainer>
@@ -225,14 +219,12 @@ export default function HomePage() {
                       <DivPokeDetails>
                         <PokeEvolutions>
                           <strong>Evolution</strong>
-                          {pokeEvolutionName.map(
-                            (evolution, index: number) => (
-                              <div key={index}>
-                                <img src={evolution.url} alt="" />
-                                <p>{evolution.name}</p>
-                              </div>
-                            )
-                          )}
+                          {pokeEvolutionName.map((evolution: { name: string, url: string }, index: number) => (
+                            <div key={index}>
+                              <img src={evolution.url} alt="" />
+                              <p>{evolution.name}</p>
+                            </div>
+                          ))}
                         </PokeEvolutions>
                         <Description>
                           {pokeDescription.map(
