@@ -190,11 +190,30 @@ export const PokeAttributes = styled.div`
 
 export const PokeEvolutions = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   height: 100px;
   background-color: #fff;
   border-radius: 5px;
   margin-left: 60px;
+  padding: 10px;
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow-y: hidden;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 50px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
 `;
 
 export const NotFound = styled.div`

@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  requestToApi,
-  requestToApiWithParams,
-} from "./api/pokeApi";
+import { requestToApi, requestToApiWithParams } from "./api/pokeApi";
 import {
   PokeInterface,
   PokeDetailInterface,
@@ -71,6 +68,7 @@ export default function HomePage() {
       setSelectedPokemonData(res);
       setLoading(false);
     });
+    setPokeName("");
   };
 
   const pokeEvolution = pokeMock.filter((poke) => {
@@ -86,7 +84,7 @@ export default function HomePage() {
   const pokeDescription = pokeMock.filter(
     (poke) => poke.name === selectedPokemonData.name
   );
-  
+
   return (
     <MainContainer>
       <LeftContainer>
@@ -106,6 +104,8 @@ export default function HomePage() {
           />
           <AiOutlineSearch
             style={{ cursor: "pointer" }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "#000")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "#fff")}
             onClick={handleSearch}
           />
         </InputDiv>
@@ -219,12 +219,19 @@ export default function HomePage() {
                       <DivPokeDetails>
                         <PokeEvolutions>
                           <strong>Evolution</strong>
-                          {pokeEvolutionName.map((evolution: { name: string, url: string }, index: number) => (
-                            <div key={index}>
-                              <img src={evolution.url} alt="" />
-                              <p>{evolution.name}</p>
-                            </div>
-                          ))}
+                          <div>
+                            {pokeEvolutionName.map(
+                              (
+                                evolution: { name: string; url: string },
+                                index: number
+                              ) => (
+                                <div key={index}>
+                                  <img src={evolution.url} alt="" />
+                                  <p>{evolution.name}</p>
+                                </div>
+                              )
+                            )}
+                          </div>
                         </PokeEvolutions>
                         <Description>
                           {pokeDescription.map(
