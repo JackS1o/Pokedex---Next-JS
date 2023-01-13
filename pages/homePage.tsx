@@ -28,6 +28,7 @@ import {
   NotFound,
 } from "../styles/homePageStyles";
 import { AiOutlineSearch } from "react-icons/ai";
+import Loading from "../components/loading";
 
 const attributesColor = [
   "#ff5958",
@@ -50,6 +51,7 @@ export default function HomePage() {
     {} as PokeInterface
   );
   const [pokeName, setPokeName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     requestToApi().then((res) => setData(res));
@@ -66,8 +68,12 @@ export default function HomePage() {
     );
   }, [selectedPokemon, selectedPokemonData?.id]);
 
-  const handleSearch = () => {
-    setSelectedPokemon(pokeName);
+  const handleSearch = async () => {
+    setLoading(true);
+    await requestToApiWithParams(pokeName).then((res) => {
+      setSelectedPokemon(res);
+      setLoading(false);
+    });
   };
 
   return (
@@ -108,85 +114,113 @@ export default function HomePage() {
         </div>
       </LeftContainer>
       <RightContainerMain>
-        {selectedPokemonData.response?.data === "Not Found" ? (
-          <NotFound>
-            <h1>Pokemon not found or incorrect name!</h1>
-          </NotFound>
+        {loading ? (
+          <Loading />
         ) : (
           <>
-            <Header>
-              <h1>{`#${selectedPokemonData?.id} - ${selectedPokemonData.name}`}</h1>
-              <img
-                src={selectedPokemonData.sprites?.front_default}
-                alt="pokemon"
-              />
-            </Header>
-            <RightContainer>
-              <PokemonContainer>
-                <AboutPokemon>
-                  <img
-                    src={selectedPokemonData.sprites?.front_default}
-                    alt="pokemon"
-                  />
-                  <PokeType>
-                    <strong>Type</strong>
-                    {selectedPokemonData.types?.map(
-                      (pokeType: PokeDetailInterface, index: number) => (
-                        <p
-                          key={index}
-                          style={{ backgroundColor: typeColor[index] }}
-                        >
-                          {pokeType.type.name.toUpperCase()}
-                        </p>
-                      )
-                    )}
-                  </PokeType>
-                  <PokeMeasurements>
-                    <p>
-                      <strong>Height:</strong>{" "}
-                      {((selectedPokemonData.height / 10) * 3.281).toFixed(2)} f
-                      / {(selectedPokemonData.height / 10).toFixed(1)} m
-                    </p>
-                    <p>
-                      <strong>Weight:</strong>{" "}
-                      {((selectedPokemonData.weight / 10) * 2.205).toFixed(1)}
-                      lbs / {(selectedPokemonData.weight / 10).toFixed(1)}Kg
-                    </p>
-                  </PokeMeasurements>
-                  <PokeAttributes>
-                    <strong>Attributes</strong>
-                    <div>
-                      <div>
-                        {selectedPokemonData.stats?.map(
-                          (pokeStat: PokeDetailInterface, index: number) => (
-                            <p
-                              key={index}
-                              style={{
-                                backgroundColor: attributesColor[index],
-                              }}
-                            >
-                              {pokeStat.base_stat}{" "}
-                              {pokeStat.stat.name.slice(0, 3).toUpperCase()}
+            {selectedPokemonData.response?.data === "Not Found" ? (
+              <NotFound>
+                <h1>Pokemon not found or incorrect name!</h1>
+              </NotFound>
+            ) : (
+              <>
+                {selectedPokemonData.id === undefined ? (
+                  <Loading />
+                ) : (
+                  <>
+                    <Header>
+                      <h1>{`#${selectedPokemonData?.id} - ${selectedPokemonData.name}`}</h1>
+                      <img
+                        src={selectedPokemonData.sprites?.front_default}
+                        alt="pokemon"
+                      />
+                    </Header>
+                    <RightContainer>
+                      <PokemonContainer>
+                        <AboutPokemon>
+                          <img
+                            src={selectedPokemonData.sprites?.front_default}
+                            alt="pokemon"
+                          />
+                          <PokeType>
+                            <strong>Type</strong>
+                            {selectedPokemonData.types?.map(
+                              (
+                                pokeType: PokeDetailInterface,
+                                index: number
+                              ) => (
+                                <p
+                                  key={index}
+                                  style={{ backgroundColor: typeColor[index] }}
+                                >
+                                  {pokeType.type.name.toUpperCase()}
+                                </p>
+                              )
+                            )}
+                          </PokeType>
+                          <PokeMeasurements>
+                            <p>
+                              <strong>Height:</strong>{" "}
+                              {(
+                                (selectedPokemonData.height / 10) *
+                                3.281
+                              ).toFixed(2)}{" "}
+                              f / {(selectedPokemonData.height / 10).toFixed(1)}{" "}
+                              m
                             </p>
+                            <p>
+                              <strong>Weight:</strong>{" "}
+                              {(
+                                (selectedPokemonData.weight / 10) *
+                                2.205
+                              ).toFixed(1)}
+                              lbs /{" "}
+                              {(selectedPokemonData.weight / 10).toFixed(1)}Kg
+                            </p>
+                          </PokeMeasurements>
+                          <PokeAttributes>
+                            <strong>Attributes</strong>
+                            <div>
+                              <div>
+                                {selectedPokemonData.stats?.map(
+                                  (
+                                    pokeStat: PokeDetailInterface,
+                                    index: number
+                                  ) => (
+                                    <p
+                                      key={index}
+                                      style={{
+                                        backgroundColor: attributesColor[index],
+                                      }}
+                                    >
+                                      {pokeStat.base_stat}{" "}
+                                      {pokeStat.stat.name
+                                        .slice(0, 3)
+                                        .toUpperCase()}
+                                    </p>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          </PokeAttributes>
+                        </AboutPokemon>
+                      </PokemonContainer>
+                      <PokeEvolutions>
+                        <strong>Evolution</strong>
+                        {selectedPokemonEvolution?.chain?.evolves_to?.map(
+                          (evolution: PokeInterface, index: number) => (
+                            <div key={index}>
+                              <p>{evolution.species.name}</p>
+                              <p>{evolution.evolves_to[0]?.species.name}</p>
+                            </div>
                           )
                         )}
-                      </div>
-                    </div>
-                  </PokeAttributes>
-                </AboutPokemon>
-              </PokemonContainer>
-              <PokeEvolutions>
-                <strong>Evolution</strong>
-                {selectedPokemonEvolution?.chain?.evolves_to?.map(
-                  (evolution: PokeInterface, index: number) => (
-                    <div key={index}>
-                      <p>{evolution.species.name}</p>
-                      <p>{evolution.evolves_to[0]?.species.name}</p>
-                    </div>
-                  )
+                      </PokeEvolutions>
+                    </RightContainer>
+                  </>
                 )}
-              </PokeEvolutions>
-            </RightContainer>
+              </>
+            )}
           </>
         )}
       </RightContainerMain>

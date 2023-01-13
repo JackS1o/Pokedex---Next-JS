@@ -31,7 +31,7 @@ export const LeftContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 30px;
+  height: 70px;
   margin: 10px;
 `;
 
@@ -43,7 +43,7 @@ export const Hr = styled.hr`
 export const P = styled.p`
   margin: 5px;
   height: 80px;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
 `;
 
