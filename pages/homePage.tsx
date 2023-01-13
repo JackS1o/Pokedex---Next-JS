@@ -24,7 +24,9 @@ import {
   PokeMeasurements,
   PokeAttributes,
   PokeEvolutions,
+  InputDiv,
 } from "../styles/homePageStyles";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
@@ -35,6 +37,7 @@ export default function HomePage() {
   const [selectedPokemonEvolution, setSelectedPokemonEvolution] = useState(
     {} as PokeInterface
   );
+  const [pokeName, setPokeName] = useState("");
 
   useEffect(() => {
     requestToApi().then((res) => setData(res));
@@ -46,13 +49,14 @@ export default function HomePage() {
         setSelectedPokemonData(res)
       );
     }
-    requestPokemonEvolution(selectedPokemonData.id).then((res) =>
+    requestPokemonEvolution(selectedPokemonData?.id).then((res) =>
       setSelectedPokemonEvolution(res)
     );
-  }, [selectedPokemon, selectedPokemonData.id]);
+  }, [selectedPokemon, selectedPokemonData?.id]);
 
-  const { results } = data;
-  console.log(selectedPokemonEvolution);
+  const handleSearch = async () => {
+    setSelectedPokemon(pokeName);
+  };
 
   return (
     <MainContainer>
@@ -64,10 +68,21 @@ export default function HomePage() {
         <P>
           Everything you wanted to know about your favorite pocket monsters!
         </P>
-        <Input type="text" placeholder="Search by name or number" />
+        <InputDiv>
+          <Input
+            type="text"
+            placeholder="Search by name or number"
+            value={pokeName}
+            onChange={(e) => setPokeName(e.target.value)}
+          />
+          <AiOutlineSearch
+            style={{ cursor: "pointer" }}
+            onClick={handleSearch}
+          />
+        </InputDiv>
         <Hr />
         <div>
-          {results?.map((result: PokeInterface, index: number) => {
+          {data?.results?.map((result: PokeInterface, index: number) => {
             return (
               <div key={index}>
                 <p onClick={() => setSelectedPokemon(result.name)}>
@@ -82,7 +97,7 @@ export default function HomePage() {
       </LeftContainer>
       <RightContainerMain>
         <Header>
-          <h1>{`#${selectedPokemonData.id} - ${selectedPokemonData.name}`}</h1>
+          <h1>{`#${selectedPokemonData?.id} - ${selectedPokemonData.name}`}</h1>
           <img src={selectedPokemonData.sprites?.front_default} alt="pokemon" />
         </Header>
         <RightContainer>

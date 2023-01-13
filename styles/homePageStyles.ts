@@ -41,14 +41,23 @@ export const Hr = styled.hr`
 `;
 
 export const P = styled.p`
-  margin: 10px;
+  margin: 5px;
   height: 80px;
   font-size: 15px;
   text-align: center;
 `;
 
+export const InputDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+  margin-top: 4px;
+  height: 50px;
+`;
+
 export const Input = styled.input`
-  height: 30px;
+  height: 25px;
   width: 80%;
   margin: 10px;
   border-radius: 20px;
@@ -82,7 +91,7 @@ export const Header = styled.header`
   align-items: center;
   color: white;
   margin-left: 100px;
-  height: 100px;
+  height: 115px;
   width: 100%;
   img {
     height: 100px;
@@ -129,6 +138,7 @@ export const PokeMeasurements = styled.div`
 
 export const PokeAttributes = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   background-color: #fff;
   margin-left: 45px;
