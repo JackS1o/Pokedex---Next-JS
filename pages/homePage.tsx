@@ -61,18 +61,18 @@ export default function HomePage() {
 
   useEffect(() => {
     requestToApi().then((res) => setData(res));
+    requestToApiWithParams(selectedPokemon).then((res) =>
+      setSelectedPokemonData(res)
+    );
+    setLoading(true);
     setTimeout(() => {
-      setLoading(true);
-      requestToApiWithParams(selectedPokemon).then((res) =>
-        setSelectedPokemonData(res)
-      );
       if (!selectedPokemon) {
         requestToApiWithParams("bulbasaur").then((res) =>
           setSelectedPokemonData(res)
         );
       }
-      setLoading(false);
     }, 700);
+    setLoading(false);
   }, [selectedPokemon]);
 
   const handleSearch = async () => {
