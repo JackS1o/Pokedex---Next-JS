@@ -41,6 +41,12 @@ const attributesColor = [
 
 const typeColor = ["#33c942", "#ba3ea5"];
 
+const font = {
+  fontWeight: "700",
+  cursor: "pointer",
+  textDecoration: "underline",
+};
+
 export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
   const [selectedPokemon, setSelectedPokemon] = useState("");
@@ -114,7 +120,10 @@ export default function HomePage() {
           {data?.results?.map((result: PokeInterface, index: number) => {
             return (
               <div key={index}>
-                <p onClick={() => setSelectedPokemon(result.name)}>
+                <p
+                  onClick={() => setSelectedPokemon(result.name)}
+                  style={result.name === selectedPokemon ? font : {}}
+                >
                   {`#${index + 1}`} -{" "}
                   {result.name[0].toUpperCase() + result.name.slice(1)}
                 </p>
