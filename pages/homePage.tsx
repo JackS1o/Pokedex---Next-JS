@@ -7,6 +7,7 @@ import {
 import {
   PokeInterface,
   PokeDetailInterface,
+  mock,
 } from "../interfaces/pokeInterface";
 import {
   MainContainer,
@@ -26,9 +27,12 @@ import {
   PokeEvolutions,
   InputDiv,
   NotFound,
+  Description,
+  DivPokeDetails,
 } from "../styles/homePageStyles";
 import { AiOutlineSearch } from "react-icons/ai";
 import Loading from "../components/loading";
+import { pokeMock } from "../mocks/pokeMocks";
 
 const attributesColor = [
   "#ff5958",
@@ -75,6 +79,10 @@ export default function HomePage() {
       setLoading(false);
     });
   };
+
+  const pokeDescription = pokeMock.filter(
+    (poke) => poke.name === selectedPokemonData.name
+  );
 
   return (
     <MainContainer>
@@ -160,7 +168,7 @@ export default function HomePage() {
                           </PokeType>
                           <PokeMeasurements>
                             <p>
-                              <strong>Height:</strong>{" "}
+                              <strong>Height:</strong>
                               {(
                                 (selectedPokemonData.height / 10) *
                                 3.281
@@ -169,7 +177,7 @@ export default function HomePage() {
                               m
                             </p>
                             <p>
-                              <strong>Weight:</strong>{" "}
+                              <strong>Weight:</strong>
                               {(
                                 (selectedPokemonData.weight / 10) *
                                 2.205
@@ -205,17 +213,26 @@ export default function HomePage() {
                           </PokeAttributes>
                         </AboutPokemon>
                       </PokemonContainer>
-                      <PokeEvolutions>
-                        <strong>Evolution</strong>
-                        {selectedPokemonEvolution?.chain?.evolves_to?.map(
-                          (evolution: PokeInterface, index: number) => (
-                            <div key={index}>
-                              <p>{evolution.species.name}</p>
-                              <p>{evolution.evolves_to[0]?.species.name}</p>
-                            </div>
-                          )
-                        )}
-                      </PokeEvolutions>
+                      <DivPokeDetails>
+                        <PokeEvolutions>
+                          <strong>Evolution</strong>
+                          {selectedPokemonEvolution?.chain?.evolves_to?.map(
+                            (evolution: PokeInterface, index: number) => (
+                              <div key={index}>
+                                <p>{evolution.species.name}</p>
+                                <p>{evolution.evolves_to[0]?.species.name}</p>
+                              </div>
+                            )
+                          )}
+                        </PokeEvolutions>
+                        <Description>
+                          {pokeDescription.map(
+                            (pokemon: mock, index: number) => (
+                              <p key={index}>{pokemon.about}</p>
+                            )
+                          )}
+                        </Description>
+                      </DivPokeDetails>
                     </RightContainer>
                   </>
                 )}

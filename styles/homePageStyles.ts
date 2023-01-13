@@ -209,3 +209,36 @@ export const NotFound = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
+export const DivPokeDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 700px;
+  border-radius: 5px;
+  div::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  div::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  div::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+`;
+
+export const Description = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  margin-left: 45px;
+  margin-bottom: 10px;
+  height: 300px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  p {
+    font-size: 12px;
+    padding: 10px;
+  }
+`;

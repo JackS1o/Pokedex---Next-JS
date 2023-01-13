@@ -35,3 +35,8 @@ export interface PokeDetailInterface {
     name: string;
   };
 }
+
+export interface mock {
+  about: string;
+  name: string;
+}
