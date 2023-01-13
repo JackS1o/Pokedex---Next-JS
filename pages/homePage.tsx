@@ -61,23 +61,29 @@ export default function HomePage() {
 
   useEffect(() => {
     requestToApi().then((res) => setData(res));
-    requestToApiWithParams(selectedPokemon).then((res) =>
-      setSelectedPokemonData(res)
-    );
-    if (!selectedPokemon) {
-      requestToApiWithParams("bulbasaur").then((res) =>
+    setTimeout(() => {
+      setLoading(true);
+      requestToApiWithParams(selectedPokemon).then((res) =>
         setSelectedPokemonData(res)
       );
-    }
+      if (!selectedPokemon) {
+        requestToApiWithParams("bulbasaur").then((res) =>
+          setSelectedPokemonData(res)
+        );
+      }
+      setLoading(false);
+    }, 700);
   }, [selectedPokemon]);
 
   const handleSearch = async () => {
     const pokeNameLower = pokeName.toLowerCase();
     setLoading(true);
-    await requestToApiWithParams(pokeNameLower).then((res) => {
-      setSelectedPokemonData(res);
+    setTimeout(async () => {
+      await requestToApiWithParams(pokeNameLower).then((res) => {
+        setSelectedPokemonData(res);
+      });
       setLoading(false);
-    });
+    }, 500);
     setPokeName("");
   };
 
