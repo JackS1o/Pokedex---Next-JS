@@ -149,7 +149,10 @@ export default function HomePage() {
                 ) : (
                   <>
                     <Header>
-                      <h1>{`#${selectedPokemonData?.id} - ${selectedPokemonData.name}`}</h1>
+                      <h1>{`#${selectedPokemonData?.id} - ${
+                        selectedPokemonData.name[0].toUpperCase() +
+                        selectedPokemonData.name.slice(1)
+                      }`}</h1>
                       <img
                         src={selectedPokemonData.sprites?.front_default}
                         alt="pokemon"
