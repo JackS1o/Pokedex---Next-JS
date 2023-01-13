@@ -7,5 +7,8 @@ module.exports = {
   images: {
     domains: ['cdn.riderize.com'],
   },
+  compiler: {
+    styledComponents: true
+  },
   nextConfig
 }
