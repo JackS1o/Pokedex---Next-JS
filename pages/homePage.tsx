@@ -65,11 +65,11 @@ export default function HomePage() {
       setSelectedPokemonData(res)
     );
     if (!selectedPokemon) {
-      requestToApiWithParams(selectedPokemon).then((res) =>
+      requestToApiWithParams("bulbasaur").then((res) =>
         setSelectedPokemonData(res)
       );
     }
-  }, [selectedPokemon, setSelectedPokemonData]);
+  }, [selectedPokemon]);
 
   const handleSearch = async () => {
     const pokeNameLower = pokeName.toLowerCase();

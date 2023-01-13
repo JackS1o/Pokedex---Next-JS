@@ -1,9 +1,11 @@
 import Header from "../components/header";
 import { ChangeEvent, useState } from "react";
 import { Container, Image, Div, Input, Button } from "../styles/loginStyles";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -16,7 +18,7 @@ export default function Login() {
     if (!result || email === "" || email.length < 5) {
       return alert("Digite um e-mail válido!");
     }
-    window.location.href = "/homePage";
+    router.push("/homePage");
   };
 
   return (
