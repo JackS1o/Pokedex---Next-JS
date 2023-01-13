@@ -18,6 +18,11 @@ export const LeftContainer = styled.div`
     width: 100%;
     justify-content: center;
     padding-left: 15px;
+    div {
+      p {
+        cursor: pointer;
+      }
+    }
   }
   div::-webkit-scrollbar {
     width: 0.25rem;
@@ -191,7 +196,7 @@ export const PokeAttributes = styled.div`
 export const PokeEvolutions = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100px;
+  height: 110px;
   background-color: #fff;
   border-radius: 5px;
   margin-left: 60px;
