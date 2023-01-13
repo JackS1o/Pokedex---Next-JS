@@ -19,10 +19,25 @@ const LeftContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 20%;
+  width: 25%;
   background-color: #dd4b4a;
   border-right: 1px solid #e0e0e0;
   color: white;
+  height: 100vh;
+  div {
+    width: 100%;
+    justify-content: center;
+    padding-left: 15px;
+  }
+  div::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  div::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  div::-webkit-scrollbar-thumb {
+    background: #000;
+  }
 `;
 
 const Logo = styled.img`
@@ -51,28 +66,30 @@ const Input = styled.input`
 const RightContainer = styled.div`
   display: flex;
   background-color: #00b4ec;
-  width: 100vw;
+  width: 75%;
 `;
 
 const PokemonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  align-items: center;
+  width: 100%;
 `;
 
 const RightContainerMain = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #00b4ec;
-  width: 50%;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
   color: white;
-  margin-left: 50px;
-  height: 200px;
+  margin-left: 100px;
+  height: 100px;
   width: 100%;
   img {
     height: 100px;
@@ -84,9 +101,9 @@ const AboutPokemon = styled.div`
   flex-direction: column;
   height: 100%;
   img {
-    height: 300px;
+    height: 250px;
     background: white;
-    width: 300px;
+    width: 350px;
     border-radius: 5%;
     margin-left: 45px;
     margin-bottom: 10px;
@@ -99,7 +116,7 @@ const PokeType = styled.div`
   justify-content: space-evenly;
   background-color: #fff;
   height: 30px;
-  width: 300px;
+  width: 350px;
   border-radius: 5px;
   margin-left: 45px;
   margin-bottom: 10px;
@@ -112,22 +129,56 @@ const PokeMeasurements = styled.div`
   background-color: #fff;
   margin-left: 45px;
   margin-bottom: 10px;
-  width: 300px;
+  width: 350px;
   height: 30px;
   border-radius: 5px;
 `;
 
 const PokeAttributes = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   background-color: #fff;
   margin-left: 45px;
   margin-bottom: 10px;
-  width: 300px;
+  width: 350px;
   height: 100px;
   border-radius: 5px;
   padding: 10px;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+      border-radius: 5px;
+      p {
+        text-align: center;
+        width: 100px;
+        margin: 1px;
+        background-color: #00b4ec;
+        border-radius: 5px;
+      }
+    }
+  }
+`;
+
+const PokeEvolutions = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 100px;
+  width: 700px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: 60px;
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export default function HomePage() {
@@ -150,7 +201,9 @@ export default function HomePage() {
         setSelectedPokemonData(res)
       );
     }
-    requestPokemonEvolution(1).then((res) => setSelectedPokemonEvolution(res));
+    requestPokemonEvolution(selectedPokemonData.id).then((res) =>
+      setSelectedPokemonEvolution(res)
+    );
   }, [selectedPokemon, selectedPokemonData.id]);
 
   const { results } = data;
@@ -195,7 +248,7 @@ export default function HomePage() {
                 alt="pokemon"
               />
               <PokeType>
-                <p>Type</p>
+                <strong>Type</strong>
                 {selectedPokemonData.types?.map(
                   (pokeType: PokeDetailInterface, index: number) => (
                     <p key={index}>{pokeType.type.name}</p>
@@ -203,34 +256,45 @@ export default function HomePage() {
                 )}
               </PokeType>
               <PokeMeasurements>
-                <p>Height: {selectedPokemonData.height}</p>
-                <p>Weight: {selectedPokemonData.weight}</p>
+                <p>
+                  <strong>Height:</strong>{" "}
+                  {((selectedPokemonData.height / 10) * 3.281).toFixed(2)} f /{" "}
+                  {(selectedPokemonData.height / 10).toFixed(1)} m
+                </p>
+                <p>
+                  <strong>Weight:</strong>{" "}
+                  {((selectedPokemonData.weight / 10) * 2.205).toFixed(1)}lbs /{" "}
+                  {(selectedPokemonData.weight / 10).toFixed(1)}Kg
+                </p>
               </PokeMeasurements>
               <PokeAttributes>
-                <p>Attributes</p>
-                {selectedPokemonData.stats?.map(
-                  (pokeStat: PokeDetailInterface, index: number) => (
-                    <p key={index}>
-                      {pokeStat.base_stat} {pokeStat.stat.name}
-                    </p>
-                  )
-                )}
+                <strong>Attributes</strong>
+                <div>
+                  <div>
+                    {selectedPokemonData.stats?.map(
+                      (pokeStat: PokeDetailInterface, index: number) => (
+                        <p key={index}>
+                          {pokeStat.base_stat}{" "}
+                          {pokeStat.stat.name.slice(0, 3).toUpperCase()}
+                        </p>
+                      )
+                    )}
+                  </div>
+                </div>
               </PokeAttributes>
             </AboutPokemon>
           </PokemonContainer>
-          <div>
-            <p>Evolution</p>
-            <div>
-              {selectedPokemonEvolution?.chain?.evolves_to?.map(
-                (evolution: PokeInterface, index: number) => (
-                  <div key={index}>
-                    <p>{evolution.species.name}</p>
-                    <p>{evolution.evolves_to[0].species.name}</p>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
+          <PokeEvolutions>
+            <strong>Evolution</strong>
+            {selectedPokemonEvolution?.chain?.evolves_to?.map(
+              (evolution: PokeInterface, index: number) => (
+                <div key={index}>
+                  <p>{evolution.species.name}</p>
+                  <p>{evolution.evolves_to[0]?.species.name}</p>
+                </div>
+              )
+            )}
+          </PokeEvolutions>
         </RightContainer>
       </RightContainerMain>
     </MainContainer>
