@@ -69,8 +69,9 @@ export default function HomePage() {
   }, [selectedPokemon, setSelectedPokemonData]);
 
   const handleSearch = async () => {
+    const pokeNameLower = pokeName.toLowerCase();
     setLoading(true);
-    await requestToApiWithParams(pokeName).then((res) => {
+    await requestToApiWithParams(pokeNameLower).then((res) => {
       setSelectedPokemonData(res);
       setLoading(false);
     });
