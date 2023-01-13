@@ -75,7 +75,7 @@ export const PokemonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 110%;
 `;
 
 export const RightContainerMain = styled.div`
@@ -192,15 +192,9 @@ export const PokeEvolutions = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 100px;
-  width: 700px;
   background-color: #fff;
   border-radius: 5px;
   margin-left: 60px;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 `;
 
 export const NotFound = styled.div`
@@ -214,7 +208,7 @@ export const DivPokeDetails = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 700px;
+  width: 900px;
   border-radius: 5px;
   div::-webkit-scrollbar {
     width: 0.25rem;
@@ -231,7 +225,7 @@ export const Description = styled.div`
   display: flex;
   flex-wrap: wrap;
   background-color: #fff;
-  margin-left: 45px;
+  margin-left: 60px;
   margin-bottom: 10px;
   height: 300px;
   border-radius: 5px;

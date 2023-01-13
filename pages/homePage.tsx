@@ -80,6 +80,15 @@ export default function HomePage() {
     });
   };
 
+  const pokeEvolution = pokeMock
+    .filter((poke) => {
+      const { id } = poke;
+      const evolutions = id.find((pokeId) => pokeId === selectedPokemonData.id);
+      return evolutions;
+    });
+
+  const pokeEvolutionName = pokeEvolution.filter((poke) => poke.name !== selectedPokemonData.name);
+  
   const pokeDescription = pokeMock.filter(
     (poke) => poke.name === selectedPokemonData.name
   );
@@ -216,11 +225,11 @@ export default function HomePage() {
                       <DivPokeDetails>
                         <PokeEvolutions>
                           <strong>Evolution</strong>
-                          {selectedPokemonEvolution?.chain?.evolves_to?.map(
-                            (evolution: PokeInterface, index: number) => (
+                          {pokeEvolutionName.map(
+                            (evolution, index: number) => (
                               <div key={index}>
-                                <p>{evolution.species.name}</p>
-                                <p>{evolution.evolves_to[0]?.species.name}</p>
+                                <img src={evolution.url} alt="" />
+                                <p>{evolution.name}</p>
                               </div>
                             )
                           )}
