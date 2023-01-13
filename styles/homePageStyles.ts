@@ -103,12 +103,12 @@ export const AboutPokemon = styled.div`
   flex-direction: column;
   height: 100%;
   img {
-    height: 250px;
+    height: 200px;
     background: white;
     width: 350px;
-    border-radius: 5%;
+    border-radius: 10px;
     margin-left: 45px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 `;
 
@@ -117,23 +117,40 @@ export const PokeType = styled.div`
   align-items: center;
   justify-content: space-evenly;
   background-color: #fff;
-  height: 30px;
+  height: 40px;
   width: 350px;
   border-radius: 5px;
   margin-left: 45px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  overflow-y: hidden;
+  p {
+    text-align: center;
+    width: 80px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 12px;
+  }
 `;
 
 export const PokeMeasurements = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  background-color: #fff;
+  justify-content: space-between;
   margin-left: 45px;
-  margin-bottom: 10px;
-  width: 350px;
-  height: 30px;
-  border-radius: 5px;
+  margin-bottom: 15px;
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    background-color: #fff;
+    width: 170px;
+    height: 35px;
+    border-radius: 5px;
+  }
 `;
 
 export const PokeAttributes = styled.div`
@@ -144,7 +161,7 @@ export const PokeAttributes = styled.div`
   margin-left: 45px;
   margin-bottom: 10px;
   width: 350px;
-  height: 100px;
+  height: 120px;
   border-radius: 5px;
   padding: 10px;
   div {
@@ -154,16 +171,18 @@ export const PokeAttributes = styled.div`
     div {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-      margin: 10px;
       border-radius: 5px;
       p {
         text-align: center;
         width: 80px;
-        margin: 1px;
-        background-color: #00b4ec;
+        margin: 5px;
         border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        padding: 2px;
+        font-size: 12px;
       }
     }
   }
@@ -182,4 +201,11 @@ export const PokeEvolutions = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+`;
+
+export const NotFound = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;

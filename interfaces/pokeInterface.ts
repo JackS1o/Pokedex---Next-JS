@@ -1,4 +1,8 @@
 export interface PokeInterface {
+  response: {
+    data: string;
+  };
+  data: string;
   name: string;
   url: string;
   id: number;
