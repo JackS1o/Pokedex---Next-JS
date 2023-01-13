@@ -93,13 +93,24 @@ export const RightContainerMain = styled.div`
 
 export const Header = styled.header`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   color: white;
   margin-left: 100px;
   height: 115px;
-  width: 100%;
-  img {
-    height: 100px;
+  width: 90%;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 100px;
+    }
+  }
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 2em; 
   }
 `;
 

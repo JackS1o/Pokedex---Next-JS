@@ -27,6 +27,9 @@ import {
   DivPokeDetails,
 } from "../styles/homePageStyles";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BsMoon } from "react-icons/bs";
+import { FiSun } from "react-icons/fi";
+import { MdOutlineToggleOff } from "react-icons/md";
 import Loading from "../components/loading";
 import { pokeMock } from "../mocks/pokeMocks";
 
@@ -150,14 +153,21 @@ export default function HomePage() {
                 ) : (
                   <>
                     <Header>
-                      <h1>{`#${selectedPokemonData?.id} - ${
-                        selectedPokemonData.name[0].toUpperCase() +
-                        selectedPokemonData.name.slice(1)
-                      }`}</h1>
-                      <img
-                        src={selectedPokemonData.sprites?.front_default}
-                        alt="pokemon"
-                      />
+                      <div>
+                        <h1>{`#${selectedPokemonData?.id} - ${
+                          selectedPokemonData.name[0].toUpperCase() +
+                          selectedPokemonData.name.slice(1)
+                        }`}</h1>
+                        <img
+                          src={selectedPokemonData.sprites?.front_default}
+                          alt="pokemon"
+                        />
+                      </div>
+                      <div>
+                        <BsMoon style={{ fontSize: "25px" }} />
+                        <MdOutlineToggleOff style={{ width: "50px", fontSize: "40px" }} />
+                        <FiSun style={{ fontSize: "25px" }} />
+                      </div>
                     </Header>
                     <RightContainer>
                       <PokemonContainer>
