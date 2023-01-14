@@ -170,9 +170,9 @@ export default function HomePage() {
                         />
                       </div>
                       <div>
-                        <BsMoon style={{ fontSize: "25px" }} />
-                        <MdOutlineToggleOff style={{ width: "50px", fontSize: "40px" }} />
                         <FiSun style={{ fontSize: "25px" }} />
+                        <MdOutlineToggleOff style={{ width: "50px", fontSize: "40px" }} />
+                        <BsMoon style={{ fontSize: "20px" }} />
                       </div>
                     </Header>
                     <RightContainer>
