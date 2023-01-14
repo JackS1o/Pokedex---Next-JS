@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import { requestToApi, requestToApiWithParams } from "./api/pokeApi";
 import {
   PokeInterface,
@@ -32,6 +32,8 @@ import { FiSun } from "react-icons/fi";
 import { MdOutlineToggleOff } from "react-icons/md";
 import Loading from "../components/loading";
 import { pokeMock } from "../mocks/pokeMocks";
+import { optionTheme } from "../styles/headerStyles";
+import { MyContext } from "../context/context";
 
 const attributesColor = [
   "#ff5958",
@@ -52,22 +54,23 @@ const font = {
 
 export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
-  const [selectedPokemon, setSelectedPokemon] = useState("");
+  const [selectedPokemon, setSelectedPokemon] = useState<string>("");
   const [selectedPokemonData, setSelectedPokemonData] = useState(
     {} as PokeInterface
   );
-  const [pokeName, setPokeName] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [pokeName, setPokeName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const { theme, setTheme } = useContext(MyContext) as any;
 
   useEffect(() => {
-    requestToApi().then((res) => setData(res));
+    requestToApi().then((res: any) => setData(res));
     requestToApiWithParams(selectedPokemon).then((res) =>
       setSelectedPokemonData(res)
     );
     setLoading(true);
     setTimeout(() => {
       if (!selectedPokemon) {
-        requestToApiWithParams("bulbasaur").then((res) =>
+        requestToApiWithParams("bulbasaur").then((res: any) =>
           setSelectedPokemonData(res)
         );
       }
@@ -79,7 +82,7 @@ export default function HomePage() {
     const pokeNameLower = pokeName.toLowerCase();
     setLoading(true);
     setTimeout(async () => {
-      await requestToApiWithParams(pokeNameLower).then((res) => {
+      await requestToApiWithParams(pokeNameLower).then((res: any) => {
         setSelectedPokemonData(res);
       });
       setLoading(false);
@@ -87,18 +90,20 @@ export default function HomePage() {
     setPokeName("");
   };
 
-  const pokeEvolution = pokeMock.filter((poke) => {
+  const pokeEvolution = pokeMock.filter((poke: mock) => {
     const { id } = poke;
-    const evolutions = id.find((pokeId) => pokeId === selectedPokemonData.id);
+    const evolutions = id.find(
+      (pokeId: number) => pokeId === selectedPokemonData.id
+    );
     return evolutions;
   });
 
   const pokeEvolutionName = pokeEvolution.filter(
-    (poke) => poke.name !== selectedPokemonData.name
+    (poke: mock) => poke.name !== selectedPokemonData.name
   );
 
   const pokeDescription = pokeMock.filter(
-    (poke) => poke.name === selectedPokemonData.name
+    (poke: mock) => poke.name === selectedPokemonData.name
   );
 
   return (
@@ -116,12 +121,18 @@ export default function HomePage() {
             type="text"
             placeholder="Search by name or number"
             value={pokeName}
-            onChange={(e) => setPokeName(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPokeName(e.target.value)
+            }
           />
           <AiOutlineSearch
             style={{ cursor: "pointer" }}
-            onMouseOver={(e) => (e.currentTarget.style.color = "#000")}
-            onMouseOut={(e) => (e.currentTarget.style.color = "#fff")}
+            onMouseOver={(e: MouseEvent<SVGElement>) =>
+              (e.currentTarget.style.color = "#000")
+            }
+            onMouseOut={(e: MouseEvent<SVGElement>) =>
+              (e.currentTarget.style.color = "#fff")
+            }
             onClick={handleSearch}
           />
         </InputDiv>
@@ -171,7 +182,18 @@ export default function HomePage() {
                       </div>
                       <div>
                         <FiSun style={{ fontSize: "25px" }} />
-                        <MdOutlineToggleOff style={{ width: "50px", fontSize: "40px" }} />
+                        <MdOutlineToggleOff
+                          onClick={() => setTheme(!theme)}
+                          style={
+                            theme
+                              ? optionTheme.dark
+                              : {
+                                  width: "50px",
+                                  fontSize: "40px",
+                                  color: "white",
+                                }
+                          }
+                        />
                         <BsMoon style={{ fontSize: "20px" }} />
                       </div>
                     </Header>

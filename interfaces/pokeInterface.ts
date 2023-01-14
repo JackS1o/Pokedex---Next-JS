@@ -15,12 +15,14 @@ export interface PokeInterface {
   weight: number;
   stats: [];
   chain: {};
-  evolves_to: [{
-    species: {
-      name: string;
-    },
-    evolves_to: []
-  }];
+  evolves_to: [
+    {
+      species: {
+        name: string;
+      };
+      evolves_to: [];
+    }
+  ];
   species: {
     name: string;
   };
@@ -39,4 +41,6 @@ export interface PokeDetailInterface {
 export interface mock {
   about: string;
   name: string;
+  id: number[];
+  url: string;
 }
