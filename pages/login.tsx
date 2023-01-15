@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import { ChangeEvent, useContext, useState } from "react";
-import { Container, Image, Div, Input, Button } from "../styles/loginStyles";
+import { Container, Image, Div, Input, Button, MainContainer } from "../styles/loginStyles";
 import { useRouter } from "next/router";
 import { MyContext } from "../context/context";
 
@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   return (
-    <>
+    <MainContainer>
       <Header />
       <Container theme={theme ? dark : light}>
         <Image src="../pokeball.svg" alt="pokeball" />
@@ -50,6 +50,6 @@ export default function Login() {
           </Button>
         </Div>
       </Container>
-    </>
+    </MainContainer>
   );
 }
