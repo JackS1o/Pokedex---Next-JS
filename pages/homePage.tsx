@@ -117,11 +117,11 @@ export default function HomePage() {
   });
 
   const pokeEvolutionName = pokeEvolution.filter(
-    (poke: mock) => poke.name !== selectedPokemonData.name
+    (poke: mock) => poke.name.toLowerCase() !== selectedPokemonData.name
   );
 
   const pokeDescription = pokeMock.filter(
-    (poke: mock) => poke.name === selectedPokemonData.name
+    (poke: mock) => poke.name.toLowerCase() === selectedPokemonData.name
   );
 
   return (
@@ -296,7 +296,7 @@ export default function HomePage() {
                               ) => (
                                 <div key={index}>
                                   <img src={evolution.url} alt="" />
-                                  <p>{evolution.name}</p>
+                                  <strong>{evolution.name}</strong>
                                 </div>
                               )
                             )}

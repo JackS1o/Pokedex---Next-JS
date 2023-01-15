@@ -224,7 +224,7 @@ export const PokeEvolutions = styled.div`
       img {
         height: 50px;
       }
-      p {
+      strong {
         font-size: 12px;
       }
     }
