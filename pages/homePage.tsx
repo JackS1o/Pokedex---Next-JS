@@ -40,35 +40,13 @@ import Loading from "../components/loading";
 import { pokeMock } from "../mocks/pokeMocks";
 import { optionTheme } from "../styles/headerStyles";
 import { MyContext } from "../context/context";
-
-const attributesColor = [
-  "#ff5958",
-  "#ff9a58",
-  "#ffca00",
-  "#156dea",
-  "#4cc752",
-  "#ff76a2",
-];
-
-const typeColor = ["#33c942", "#ba3ea5"];
-
-const font = {
-  fontWeight: "700",
-  cursor: "pointer",
-  textDecoration: "underline",
-};
-
-const dark = {
-  background: "#202123",
-  background2: "#444654",
-  pokeBackground: "#C6CDD4",
-};
-
-const light = {
-  background: "#dd4b4a",
-  background2: "#00b4ec",
-  pokeBackground: "#fff",
-};
+import {
+  attributesColor,
+  typeColor,
+  font,
+  dark,
+  light,
+} from "../utils/darkModeColors";
 
 export default function HomePage() {
   const [data, setData] = useState({} as PokeInterface);
