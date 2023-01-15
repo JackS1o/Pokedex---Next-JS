@@ -10,7 +10,7 @@ export const LeftContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 25%;
-  background-color: #dd4b4a;
+  background-color: ${(props) => props.theme.background};
   border-right: 1px solid #e0e0e0;
   color: white;
   height: 100vh;
@@ -28,7 +28,7 @@ export const LeftContainer = styled.div`
     width: 0.25rem;
   }
   div::-webkit-scrollbar-track {
-    background: #fff;
+    background: ${(props) => props.theme.pokeBackground};
   }
   div::-webkit-scrollbar-thumb {
     background: #000;
@@ -72,7 +72,6 @@ export const Input = styled.input`
 
 export const RightContainer = styled.div`
   display: flex;
-  background-color: #00b4ec;
   width: 75%;
 `;
 
@@ -86,7 +85,7 @@ export const PokemonContainer = styled.div`
 export const RightContainerMain = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #00b4ec;
+  background-color: ${(props) => props.theme.background2};
   width: 100%;
   height: 100vh;
 `;
@@ -110,7 +109,7 @@ export const Header = styled.header`
   div {
     display: flex;
     justify-content: space-evenly;
-    padding-right: 2em; 
+    padding-right: 2em;
   }
 `;
 
@@ -120,7 +119,7 @@ export const AboutPokemon = styled.div`
   height: 100%;
   img {
     height: 200px;
-    background: white;
+    background: ${(props) => props.theme.pokeBackground};
     width: 350px;
     border-radius: 10px;
     margin-left: 45px;
@@ -132,7 +131,7 @@ export const PokeType = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.pokeBackground};
   height: 40px;
   width: 350px;
   border-radius: 5px;
@@ -162,7 +161,7 @@ export const PokeMeasurements = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    background-color: #fff;
+    background-color: ${(props) => props.theme.pokeBackground};
     width: 170px;
     height: 35px;
     border-radius: 5px;
@@ -173,7 +172,7 @@ export const PokeAttributes = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.pokeBackground};
   margin-left: 45px;
   margin-bottom: 10px;
   width: 350px;
@@ -208,7 +207,7 @@ export const PokeEvolutions = styled.div`
   display: flex;
   flex-direction: column;
   height: 110px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.pokeBackground};
   border-radius: 5px;
   margin-left: 60px;
   padding: 10px;
@@ -249,7 +248,7 @@ export const DivPokeDetails = styled.div`
     width: 0.25rem;
   }
   div::-webkit-scrollbar-track {
-    background: #fff;
+    background: ${(props) => props.theme.pokeBackground};
   }
   div::-webkit-scrollbar-thumb {
     background: #000;
@@ -259,7 +258,7 @@ export const DivPokeDetails = styled.div`
 export const Description = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.pokeBackground};
   margin-left: 60px;
   margin-bottom: 10px;
   height: 300px;

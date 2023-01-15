@@ -2,8 +2,20 @@ import { useContext, useState } from "react";
 import { BsMoon } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
 import { MdOutlineToggleOff } from "react-icons/md";
-import { HeaderStyle, Image, optionTheme } from "../styles/headerStyles";
+import {
+  HeaderStyle,
+  Image,
+  optionTheme,
+} from "../styles/headerStyles";
 import { MyContext } from "../context/context";
+
+const dark = {
+  background: "#202123",
+}
+
+const light = {
+  background: "#dd4b4a",
+}
 
 export default function Header() {
   const { theme, setTheme } = useContext(MyContext) as any;
@@ -19,7 +31,7 @@ export default function Header() {
   };
 
   return (
-    <HeaderStyle>
+    <HeaderStyle theme={theme ? dark : light}>
       <Image
         src="https://cdn.riderize.com/miscellaneous/logo-pokedex.png"
         alt="logo"

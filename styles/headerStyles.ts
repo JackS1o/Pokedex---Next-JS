@@ -6,17 +6,18 @@ export const HeaderStyle = styled.header`
   align-items: center;
   height: 80px;
   width: 100vw;
-  background-color: #dd4b4a;
+  background-color: ${(props) => props.theme.background};
   div {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
   }
 `;
 
 export const Image = styled.img`
   height: 35px;
-  padding: 0 30px;
+  padding: 0 40px;
 `;
 
 export const optionTheme = {

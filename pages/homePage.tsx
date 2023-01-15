@@ -1,4 +1,10 @@
-import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { requestToApi, requestToApiWithParams } from "./api/pokeApi";
 import {
   PokeInterface,
@@ -50,6 +56,18 @@ const font = {
   fontWeight: "700",
   cursor: "pointer",
   textDecoration: "underline",
+};
+
+const dark = {
+  background: "#202123",
+  background2: "#444654",
+  pokeBackground: "#C6CDD4",
+};
+
+const light = {
+  background: "#dd4b4a",
+  background2: "#00b4ec",
+  pokeBackground: "#fff",
 };
 
 export default function HomePage() {
@@ -108,7 +126,7 @@ export default function HomePage() {
 
   return (
     <MainContainer>
-      <LeftContainer>
+      <LeftContainer theme={theme ? dark : light}>
         <Logo
           src="https://cdn.riderize.com/miscellaneous/logo-pokedex.png"
           alt="logo"
@@ -154,7 +172,7 @@ export default function HomePage() {
           })}
         </div>
       </LeftContainer>
-      <RightContainerMain>
+      <RightContainerMain theme={theme ? dark : light}>
         {loading ? (
           <Loading />
         ) : (
@@ -199,12 +217,12 @@ export default function HomePage() {
                     </Header>
                     <RightContainer>
                       <PokemonContainer>
-                        <AboutPokemon>
+                        <AboutPokemon theme={theme ? dark : light}>
                           <img
                             src={selectedPokemonData.sprites?.front_default}
                             alt="pokemon"
                           />
-                          <PokeType>
+                          <PokeType theme={theme ? dark : light}>
                             <strong>Type</strong>
                             {selectedPokemonData.types?.map(
                               (
@@ -220,7 +238,7 @@ export default function HomePage() {
                               )
                             )}
                           </PokeType>
-                          <PokeMeasurements>
+                          <PokeMeasurements theme={theme ? dark : light}>
                             <p>
                               <strong>Height:</strong>
                               {(
@@ -240,7 +258,7 @@ export default function HomePage() {
                               {(selectedPokemonData.weight / 10).toFixed(1)}Kg
                             </p>
                           </PokeMeasurements>
-                          <PokeAttributes>
+                          <PokeAttributes theme={theme ? dark : light}>
                             <strong>Attributes</strong>
                             <div>
                               <div>
@@ -268,7 +286,7 @@ export default function HomePage() {
                         </AboutPokemon>
                       </PokemonContainer>
                       <DivPokeDetails>
-                        <PokeEvolutions>
+                        <PokeEvolutions theme={theme ? dark : light}>
                           <strong>Evolution</strong>
                           <div>
                             {pokeEvolutionName.map(
@@ -284,7 +302,7 @@ export default function HomePage() {
                             )}
                           </div>
                         </PokeEvolutions>
-                        <Description>
+                        <Description theme={theme ? dark : light}>
                           {pokeDescription.map(
                             (pokemon: mock, index: number) => (
                               <p key={index}>{pokemon.about}</p>

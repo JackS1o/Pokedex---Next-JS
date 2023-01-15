@@ -1,9 +1,19 @@
 import Header from "../components/header";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { Container, Image, Div, Input, Button } from "../styles/loginStyles";
 import { useRouter } from "next/router";
+import { MyContext } from "../context/context";
+
+const dark = {
+  background: "#444654",
+};
+
+const light = {
+  background: "#fff",
+};
 
 export default function Login() {
+  const { theme } = useContext(MyContext) as any;
   const [email, setEmail] = useState("");
   const router = useRouter();
 
@@ -24,7 +34,7 @@ export default function Login() {
   return (
     <>
       <Header />
-      <Container>
+      <Container theme={theme ? dark : light}>
         <Image src="../pokeball.svg" alt="pokeball" />
         <Div>
           <Input
